@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment</title>
+</head>
+<body>
+
+<h2>Order Summary</h2>
+<p>Amount: ₹500.00</p>
+
+<!-- Add a button to trigger the payment -->
+<button id="payNowButton">Pay Now</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "rzp_test_HFg0Io6r1ISq8D",
+        "amount": 50000, // Amount in paise, e.g., 50000 for ₹500
+        "currency": "INR",
+        "name": "Pankaj Sir Academy",
+        "description": "Test Payment",
+        "image": "",
+        "order_id": "order_NPfPo31ahu6ZwL", // Replace with your actual order ID
+        "handler": function (response) {
+            // Handle the success callback (you may want to update your server with the payment details)
+            console.log(response);
+        },
+        "prefill": {
+            "name": "Customer Name",
+            "email": "customer@example.com",
+            "contact": "6201207853"
+        },
+        "notes": {
+            "notes_key_1": "Tea, Earl Grey, Hot"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+
+    var rzp = new Razorpay(options);
+
+    document.getElementById('payNowButton').addEventListener('click', function () {
+        rzp.open();
+    });
+</script>
+
+</body>
+</html>
